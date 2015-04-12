@@ -38,11 +38,12 @@ public class UF {
 
     private int sz[];
 
-    private int root(int p) {
-        while (p != id[p]) {
-            p = id[p];
+    private int root(int i) {
+        while (i != id[i]) {
+            id[i] = id[id[i]]; // halve path length!
+            i = id[i];
         }
 
-        return p;
+        return i;
     }
 }
