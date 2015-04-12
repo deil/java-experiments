@@ -12,25 +12,22 @@ public class UF {
     }
 
     public void union(int p, int q) {
-        int j = find(q);
-        int k = find(p);
-        for (int i = 0; i < id.length; i++) {
-            if (i == q)
-                continue;
-
-            if (find(i) == k) {
-                id[i] = j;
-            }
-        }
+        int j = root(p);
+        int k = root(q);
+        id[j] = k;
     }
 
     public boolean connected(int p, int q) {
-        return id[p] == id[q];
+        return root(p) == root(q);
     }
 
     private int id[];
 
-    private int find(int p) {
-        return id[p];
+    private int root(int p) {
+        while (p != id[p]) {
+            p = id[p];
+        }
+
+        return p;
     }
 }
