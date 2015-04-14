@@ -19,4 +19,8 @@ public class ThreeSumBruteForceImpl implements ThreeSum {
 
         return count;
     }
+
+    public String getName() {
+        return "brute-force";
+    }
 }

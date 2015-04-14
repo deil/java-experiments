@@ -5,4 +5,6 @@ package com.github.java_experiments.coursera;
  */
 public interface ThreeSum {
     int count(int[] a);
+
+    String getName();
 }

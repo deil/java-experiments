@@ -1,6 +1,7 @@
 package com.github.java_experiments.junit;
 
 import com.github.java_experiments.coursera.ThreeSum;
+import com.github.java_experiments.coursera.ThreeSumBinarySearchImpl;
 import com.github.java_experiments.coursera.ThreeSumBruteForceImpl;
 import org.junit.Test;
 
@@ -18,26 +19,46 @@ public class ThreeSumTest {
     }
 
     @Test
+    public void ensureBinarySearchImplWorks() {
+        ThreeSum alg = new ThreeSumBinarySearchImpl();
+        assertThat(alg.count(a), equalTo(4));
+    }
+
+    @Test
     public void checkTimeComplexity() {
+        int iterations = 6;
         int n = 100;
-        long firstDiff = 0;
-        for (int i = 0; i < 5; i++) {
-            int[] data = generateInputs(n << i); // n, 2*n, 4*n
+        int[][] data = new int[iterations][n];
 
-            long start = System.currentTimeMillis();
-            new ThreeSumBruteForceImpl().count(data);
-            long diff = System.currentTimeMillis() - start;
+        ThreeSum[] algs = new ThreeSum[2];
+        algs[0] = new ThreeSumBruteForceImpl();
+        algs[1] = new ThreeSumBinarySearchImpl();
 
-            if (firstDiff == 0) {
-                System.out.print(String.format("%d ms", diff));
-                firstDiff = diff;
-            } else {
-                System.out.print(String.format("  %.1f", diff / (double) firstDiff));
-                System.out.flush();
-            }
+        for (int i = 0; i < iterations; i++) {
+            data[i] = generateInputs(n << i);
         }
 
-        System.out.println();
+        for (int i = 0; i < algs.length; i++) {
+            long firstDiff = 0;
+            for (int j = 0; j < iterations; j++) {
+                ThreeSum alg = algs[i];
+                int[] localData = data[j];
+
+                long start = System.currentTimeMillis();
+                alg.count(localData);
+                long diff = System.currentTimeMillis() - start;
+                if (firstDiff == 0) {
+                    System.out.print(String.format("%s: %d ms", alg.getName(), diff));
+                    firstDiff = diff;
+                } else {
+                    System.out.print(String.format("  %.1f", diff / (double) firstDiff));
+                    System.out.flush();
+                }
+            }
+
+            System.out.println();
+        }
+
     }
 
     private static final int[] a = {30, -40, -20, -10, 40, 0, 10, 5};
