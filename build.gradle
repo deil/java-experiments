@@ -1,8 +1,8 @@
 apply plugin: 'java'
-apply plugin: "jacoco"
+apply plugin: 'application'
+apply plugin: 'jacoco'
 
-sourceCompatibility = 1.8
-version = '1.0'
+mainClassName = 'com.github.java_experiments.HelloWorld'
 
 repositories {
     mavenCentral()
@@ -16,4 +16,13 @@ dependencies {
     compile 'trove:trove:1.0.2'
 
     testCompile group: 'junit', name: 'junit', version: '4.11'
+}
+
+jar {
+    baseName = 'java-exp'
+    version = '0.1.0'
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.3'
 }

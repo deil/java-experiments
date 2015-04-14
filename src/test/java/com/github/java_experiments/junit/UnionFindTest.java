@@ -1,6 +1,6 @@
 package com.github.java_experiments.junit;
 
-import com.github.java_experiments.union_find.UF;
+import com.github.java_experiments.coursera.UF;
 import org.junit.Assert;
 import org.junit.Test;
 

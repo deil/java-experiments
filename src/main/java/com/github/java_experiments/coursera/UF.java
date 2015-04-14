@@ -1,4 +1,4 @@
-package com.github.java_experiments.union_find;
+package com.github.java_experiments.coursera;
 
 /**
  * Created by Anton Kosyakin on 10.04.2015.
