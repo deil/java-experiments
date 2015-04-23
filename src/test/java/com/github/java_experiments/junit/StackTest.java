@@ -40,4 +40,32 @@ public class StackTest {
 
         assertThat(str, equalTo("hello world"));
     }
+
+    @Test
+    public void testPerformance() {
+        long ms = System.currentTimeMillis();
+        Stack<Integer> stack = new StackLinkedListImpl<>();
+        performTesting(stack);
+        System.out.println(String.format("LinkedList: %d ms", System.currentTimeMillis() - ms));
+
+        ms = System.currentTimeMillis();
+        stack = new StackArrayImpl<>();
+        performTesting(stack);
+        System.out.println(String.format("Array: %d ms", System.currentTimeMillis() - ms));
+    }
+
+    private void performTesting(Stack<Integer> stack) {
+        long iterations = 15_000_000;
+        for (int i = 0; i < iterations; i++) {
+            stack.push(i);
+        }
+
+        for (int i = 0; i < iterations/2; i++) {
+            stack.pop();
+        }
+
+        for (int i = 0; i < iterations/4; i++) {
+            stack.push(i);
+        }
+    }
 }
